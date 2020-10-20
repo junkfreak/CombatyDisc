@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
     public Transform cam, discHome;
     public float jumpHeight;
 
+    public float xAxis, yAxis;
+
     //gravity
     public float gravity;
     Vector3 velocity;
@@ -31,12 +33,15 @@ public class PlayerMove : MonoBehaviour
     public float shootTimer, shootMaxTimer;
     public bool loaded;
 
+    //multiplayer
+    public int playerindx;
+
     private void Awake()
     {
         player = new Player();
         cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        player.Gameplay.Shoot.performed += ctx => Shooting();
-        player.Gameplay.Jump.performed += ctx => Jumping();
+        //player.Gameplay.Shoot.performed += ctx => Shooting();
+       // player.Gameplay.Jump.performed += ctx => Jumping();
         player.Gameplay.Move.performed += ctx => movement = ctx.ReadValue<Vector2>() ;
   
         player.Gameplay.Move.canceled += ctx => movement = Vector2.zero;
@@ -69,10 +74,15 @@ public class PlayerMove : MonoBehaviour
       
     }
   
-    private void MovePlayer()
+    public int GetPlayerIndex()
     {
-        float xAxis = movement.x;
-        float yAxis = movement.y;
+        return playerindx;
+    }
+    public void MovePlayer()
+    {
+        /* xAxis = movement.x;
+         yAxis = movement.y;*/
+
 
         Vector3 m = new Vector3(xAxis, 0f, yAxis).normalized;
 
@@ -92,7 +102,7 @@ public class PlayerMove : MonoBehaviour
 
         
     }
-    void Jumping()
+    public void Jumping()
     {
         if (grounded)
         {
@@ -100,7 +110,7 @@ public class PlayerMove : MonoBehaviour
         }
        
     }
-    void Shooting()
+    public void Shooting()
     {
         if(loaded == true)
         {
