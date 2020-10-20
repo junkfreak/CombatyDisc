@@ -34,7 +34,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         player = new Player();
-
+        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
         player.Gameplay.Shoot.performed += ctx => Shooting();
         player.Gameplay.Jump.performed += ctx => Jumping();
         player.Gameplay.Move.performed += ctx => movement = ctx.ReadValue<Vector2>() ;
