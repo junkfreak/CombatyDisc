@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     public float turnSmoothTime;
     public float turnSmoothVelocity;
     public Transform cam, discHome;
+    public Camera camy;
     public float jumpHeight;
 
     public float xAxis, yAxis;
@@ -36,12 +37,24 @@ public class PlayerMove : MonoBehaviour
     //multiplayer
     public int playerindx;
 
+    //playerstats
+    public float health, maxHealth;
+
     private void Awake()
     {
         player = new Player();
-        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        if(playerindx == 0)
+        {
+            cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+            camy = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        }
+        if(playerindx == 1)
+        {
+            cam = GameObject.FindGameObjectWithTag("MainCamera1").transform;
+            camy = GameObject.FindGameObjectWithTag("MainCamera1").GetComponent<Camera>();
+        }
         //player.Gameplay.Shoot.performed += ctx => Shooting();
-       // player.Gameplay.Jump.performed += ctx => Jumping();
+        // player.Gameplay.Jump.performed += ctx => Jumping();
         player.Gameplay.Move.performed += ctx => movement = ctx.ReadValue<Vector2>() ;
   
         player.Gameplay.Move.canceled += ctx => movement = Vector2.zero;

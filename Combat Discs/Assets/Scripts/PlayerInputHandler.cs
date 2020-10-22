@@ -24,6 +24,8 @@ public class PlayerInputHandler : MonoBehaviour
         moverss = FindObjectsOfType<PlayerMove>();
         
         mover = moverss[(int)playerindx];
+
+        input.camera = mover.camy;
     }
 
     public void OnMove(CallbackContext cntxt)

@@ -9,6 +9,10 @@ TagManager:
   - sawDisc
   - bounceDisc
   - explosionDisc
+  - sawSpawn
+  - bounceSpawn
+  - explosionSpawn
+  - MainCamera1
   layers:
   - Default
   - TransparentFX
@@ -19,8 +23,8 @@ TagManager:
   - 
   - 
   - groundLayer
-  - 
-  - 
+  - cam1
+  - cam2
   - 
   - 
   - 
