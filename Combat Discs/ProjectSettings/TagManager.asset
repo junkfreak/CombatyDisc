@@ -13,6 +13,8 @@ TagManager:
   - bounceSpawn
   - explosionSpawn
   - MainCamera1
+  - cinemachine1
+  - cinemachine2
   layers:
   - Default
   - TransparentFX

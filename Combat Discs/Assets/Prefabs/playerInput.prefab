@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerindx: 0
+  virtual1: {fileID: 0}
+  virtual2: {fileID: 0}
   Movers: []
   moverss:
   - {fileID: 0}

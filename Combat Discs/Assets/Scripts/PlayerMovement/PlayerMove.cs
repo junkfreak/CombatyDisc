@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerMove : MonoBehaviour
 {
     Player player;
@@ -13,11 +14,12 @@ public class PlayerMove : MonoBehaviour
     public float turnSmoothTime;
     public float turnSmoothVelocity;
     public Transform cam, discHome;
-    public Camera camy;
     public float jumpHeight;
-
     public float xAxis, yAxis;
 
+
+    public Camera camy;
+    
     //gravity
     public float gravity;
     Vector3 velocity;
@@ -43,7 +45,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         player = new Player();
-        if(playerindx == 0)
+        /*if(playerindx == 0)
         {
             cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
             camy = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -52,7 +54,7 @@ public class PlayerMove : MonoBehaviour
         {
             cam = GameObject.FindGameObjectWithTag("MainCamera1").transform;
             camy = GameObject.FindGameObjectWithTag("MainCamera1").GetComponent<Camera>();
-        }
+        }*/
         //player.Gameplay.Shoot.performed += ctx => Shooting();
         // player.Gameplay.Jump.performed += ctx => Jumping();
         player.Gameplay.Move.performed += ctx => movement = ctx.ReadValue<Vector2>() ;
