@@ -16,14 +16,21 @@ public class PlayerInputHandler : MonoBehaviour
     public List<PlayerMove> Movers = new List<PlayerMove>();
     public PlayerMove[] moverss;
 
-        public void Awake()
+    //Respawn
+    public List<GameObject> spawns = new List<GameObject>();
+    public GameObject spawn;
+    public float respawnTimer, maxTimer;
+
+    public void Awake()
     {
-        
+        maxTimer = 3;
+        respawnTimer = maxTimer;
         player = new Player();
         /*player.Gameplay.Shoot.performed += ctx => mover.Shooting();
         player.Gameplay.Jump.performed += ctx => mover.Jumping();*/
         input = GetComponent<PlayerInput>();
         playerindx = input.playerIndex;
+       
         moverss = FindObjectsOfType<PlayerMove>();
         
         mover = moverss[(int)playerindx];
@@ -80,6 +87,38 @@ public class PlayerInputHandler : MonoBehaviour
 
         }*/
     }
+    public void Update()
+    {
+
+        foreach (GameObject spawny in GameObject.FindGameObjectsWithTag("Spawn"))
+        {
+
+            spawns.Add(spawny);
+        }
+
+        if (mover.health <= 0)
+        {
+            Respawn();
+        }
+
+        if (respawnTimer <= 0)
+        {
+            mover.gameObject.SetActive(true);
+            if (playerindx == 0)
+            {
+                virtual1.GetComponent<CinemachineVirtualCameraBase>().Follow = mover.gameObject.transform;
+                virtual1.GetComponent<CinemachineVirtualCameraBase>().LookAt = mover .gameObject.transform;
+            }
+            if (playerindx == 1)
+            {
+                virtual2.GetComponent<CinemachineVirtualCameraBase>().Follow = mover.gameObject.transform;
+                virtual2.GetComponent<CinemachineVirtualCameraBase>().LookAt = mover.gameObject.transform;
+            }
+            respawnTimer = maxTimer;
+            mover.health = mover.maxHealth;
+            spawn = null;
+        }
+    }
 
     public void OnMove(CallbackContext cntxt)
     {
@@ -95,6 +134,31 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnShoot(CallbackContext cntxt)
     {
         mover.Shooting();
+    }
+
+    void Respawn()
+    {
+            respawnTimer -= 1 * Time.deltaTime;
+            mover.gameObject.SetActive(false);
+            if(spawn == null)
+        {
+            spawn = spawns[Random.Range(0, spawns.Count)];
+        }
+           
+            mover.transform.position =  spawn.transform.GetChild(0).transform.position;
+            mover.transform.rotation = spawn.transform.GetChild(0).transform.rotation;
+
+        if (playerindx == 0)
+        {
+            virtual1.GetComponent<CinemachineVirtualCameraBase>().Follow = spawn.gameObject.transform;
+            virtual1.GetComponent<CinemachineVirtualCameraBase>().LookAt = spawn.gameObject.transform;
+        }
+        if (playerindx == 1)
+        {
+            virtual2.GetComponent<CinemachineVirtualCameraBase>().Follow = spawn.gameObject.transform;
+            virtual2.GetComponent<CinemachineVirtualCameraBase>().LookAt = spawn.gameObject.transform;
+        }
+
     }
 
 }

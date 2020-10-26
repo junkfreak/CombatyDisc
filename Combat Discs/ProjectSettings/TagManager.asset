@@ -15,6 +15,7 @@ TagManager:
   - MainCamera1
   - cinemachine1
   - cinemachine2
+  - Spawn
   layers:
   - Default
   - TransparentFX

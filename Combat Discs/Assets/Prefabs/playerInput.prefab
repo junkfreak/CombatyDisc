@@ -142,3 +142,6 @@ MonoBehaviour:
   moverss:
   - {fileID: 0}
   - {fileID: 0}
+  spawns: []
+  respawnTimer: 3
+  maxTimer: 3

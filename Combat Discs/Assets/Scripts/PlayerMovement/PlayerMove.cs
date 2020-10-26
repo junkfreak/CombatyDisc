@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 
 public class PlayerMove : MonoBehaviour
@@ -20,6 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     public Camera camy;
     
+
     //gravity
     public float gravity;
     Vector3 velocity;
@@ -41,6 +44,9 @@ public class PlayerMove : MonoBehaviour
 
     //playerstats
     public float health, maxHealth;
+    public Slider slider;
+    public TextMeshProUGUI healthText;
+    public GameObject ui;
 
     private void Awake()
     {
@@ -64,6 +70,10 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
+        healthText.text = health + "" ;
+        slider.value = health;
+        ui.transform.LookAt(cam);
+
         shootTimer -= Time.deltaTime;
 
         // gravity applied
@@ -141,6 +151,8 @@ public class PlayerMove : MonoBehaviour
         }
      
     }
+   
+
 
     private void OnEnable()
     {
