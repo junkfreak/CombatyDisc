@@ -16,6 +16,7 @@ TagManager:
   - cinemachine1
   - cinemachine2
   - Spawn
+  - props
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - groundLayer
   - cam1
   - cam2
-  - 
+  - discs
   - 
   - 
   - 

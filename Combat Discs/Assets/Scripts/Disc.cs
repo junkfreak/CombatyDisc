@@ -8,7 +8,11 @@ public class Disc : MonoBehaviour
     public float dmg, floppyDMG, basicDMG, explosionDMG, sawDMG;
     public Vector3 velocityDisc;
     public float speed, maxSpeed;
-    public bool floppy, basic, explosion, saw;
+    public bool floppy, basic, explosion, saw, hit;
+
+    //explosion
+    public float exploSpeed, exploSize, exploMaxSize;
+    
     
     
     // Start is called before the first frame update
@@ -21,56 +25,89 @@ public class Disc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        timer -= Time.deltaTime;
+        if (hit == true)
+        {
+            timer -= Time.deltaTime;
+       
+           if (explosion == true)
+            {
+                this.gameObject.transform.GetChild(0).GetComponent<SphereCollider>().enabled = true;
+                if (this.gameObject.transform.GetChild(0).GetComponent<SphereCollider>().radius < exploMaxSize)
+                {
+                    this.gameObject.transform.GetChild(0).GetComponent<SphereCollider>().radius += exploSpeed * Time.deltaTime;
+                }
+
+            }
+        }
+
 
         velocityDisc = this.GetComponent<Rigidbody>().velocity;
         speed = velocityDisc.magnitude;
-        if(maxSpeed <= speed)
+        if (maxSpeed <= speed)
         {
-            
+
             maxSpeed = speed;
             Debug.Log(maxSpeed);
         }
-        if(timer <= 0)
+        if (timer <= 0)
         {
 
-          //  this.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
             timer = maxTimer;
-            
+            hit = false;
+
+            if (explosion == true)
+            {
+                this.gameObject.transform.GetChild(0).GetComponent<SphereCollider>().enabled = false;
+                this.gameObject.transform.GetChild(0).GetComponent<SphereCollider>().radius = exploSize;
+            }
         }
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject. tag == "Player")
+       // hit = true;
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "props")
         {
             if(speed >= maxSpeed)
             {
-               
 
+                hit = true;
                 if (basic == true)
                 {
-                    other.gameObject.GetComponent<PlayerMove>().health -= basicDMG;
-                    Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
+                    if (other.gameObject.tag == "Player")
+                    {
+                        other.gameObject.GetComponent<PlayerMove>().health -= basicDMG;
+                        Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
+                    }
+                   
                 }
 
                 if (floppy == true)
                 {
-                    other.gameObject.GetComponent<PlayerMove>().health -= floppyDMG;
-                    Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
+                    if (other.gameObject.tag == "Player")
+                    {
+                        other.gameObject.GetComponent<PlayerMove>().health -= floppyDMG;
+                        Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
+                    }
                 }
 
                 if (saw == true)
                 {
-                    other.gameObject.GetComponent<PlayerMove>().health -= sawDMG;
-                    Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
+                    if (other.gameObject.tag == "Player")
+                    {
+                        other.gameObject.GetComponent<PlayerMove>().health -= sawDMG;
+                        Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
+                    }
                 }
 
                 if (explosion == true)
                 {
-                    other.gameObject.GetComponent<PlayerMove>().health -= explosionDMG;
-                    Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
+                    if (other.gameObject.tag == "Player")
+                    {
+                        other.gameObject.GetComponent<PlayerMove>().health -= explosionDMG;
+                        Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
+                    }
                 }
             }
         }
