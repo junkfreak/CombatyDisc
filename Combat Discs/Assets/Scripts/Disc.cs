@@ -78,6 +78,7 @@ public class Disc : MonoBehaviour
                     if (other.gameObject.tag == "Player")
                     {
                         other.gameObject.GetComponent<PlayerMove>().health -= basicDMG;
+                        //other.transform.GetComponentInParent<PlayerMove>().health -= basicDMG;
                         Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
                     }
                    
@@ -88,6 +89,7 @@ public class Disc : MonoBehaviour
                     if (other.gameObject.tag == "Player")
                     {
                         other.gameObject.GetComponent<PlayerMove>().health -= floppyDMG;
+                        //other.transform.GetComponentInParent<PlayerMove>().health -= floppyDMG;
                         Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
                     }
                 }
@@ -96,7 +98,8 @@ public class Disc : MonoBehaviour
                 {
                     if (other.gameObject.tag == "Player")
                     {
-                        other.gameObject.GetComponent<PlayerMove>().health -= sawDMG;
+                        //other.gameObject.GetComponent<PlayerMove>().health -= sawDMG;
+                        other.transform.GetComponentInParent<PlayerMove>().health -= sawDMG;
                         Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
                     }
                 }
@@ -106,6 +109,7 @@ public class Disc : MonoBehaviour
                     if (other.gameObject.tag == "Player")
                     {
                         other.gameObject.GetComponent<PlayerMove>().health -= explosionDMG;
+                       // other.transform.GetComponentInParent<PlayerMove>().health -= explosionDMG;
                         Debug.Log(other.gameObject.GetComponent<PlayerMove>().health);
                     }
                 }

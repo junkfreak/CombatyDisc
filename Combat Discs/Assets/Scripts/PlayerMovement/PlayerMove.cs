@@ -118,10 +118,11 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngl, 0f) * Vector3.forward;
+            Vector3 movementy = moveDir.normalized * movementSpeed * Time.deltaTime;
 
 
 
-
+            //this.gameObject.GetComponent<Rigidbody>().AddRelativeForce (movementy);
             charCont.Move(moveDir.normalized * movementSpeed * Time.deltaTime);
         }
 
@@ -141,9 +142,10 @@ public class PlayerMove : MonoBehaviour
         {
             
             projectile.transform.SetParent(null);
-            projectile.GetComponent<MeshCollider>().isTrigger = false;
+           // projectile.GetComponent<MeshCollider>().isTrigger = false;
             projectile.GetComponent<Rigidbody>().isKinematic = false;
             projectile.GetComponent<Rigidbody>().AddForce(discHome.transform.forward * shootingSpeed);
+            //projectile.GetComponent<Rigidbody>().AddForce(camy.transform.forward * shootingSpeed);
             projectile = null;
             loaded = false;
 
@@ -151,7 +153,14 @@ public class PlayerMove : MonoBehaviour
         }
      
     }
-   
+
+    public void OnTriggerExit(Collider other)
+    {
+        if(projectile.GetComponent<MeshCollider>().isTrigger == true)
+        {
+            projectile.GetComponent<MeshCollider>().isTrigger = false;
+        }
+    }
 
 
     private void OnEnable()
