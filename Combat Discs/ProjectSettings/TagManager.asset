@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - defaultSpawn
+  - defaultDisc
+  - sawDisc
+  - bounceDisc
+  - explosionDisc
+  - sawSpawn
+  - bounceSpawn
+  - explosionSpawn
+  - MainCamera1
+  - cinemachine1
+  - cinemachine2
+  - Spawn
+  - props
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - groundLayer
+  - cam1
+  - cam2
+  - discs
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
